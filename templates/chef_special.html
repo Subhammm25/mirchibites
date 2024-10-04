@@ -1,0 +1,173 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef's Special - Mirchi Bites</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF5E1;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #D62323;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .chef-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .chef-section img {
+            width: 50%;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .chef-info {
+            width: 50%;
+        }
+
+        .chef-info h2 {
+            color: #FF6B35;
+            font-size: 2.5em;
+        }
+
+        .chef-info p {
+            font-size: 1.2em;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .chef-info .highlight {
+            color: #D62323;
+            font-weight: bold;
+        }
+
+        .special-dishes {
+            margin-top: 40px;
+        }
+
+        .dish {
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .dish h3 {
+            color: #D62323;
+            font-size: 1.8em;
+        }
+
+        .dish p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .dish img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer p {
+            font-size: 0.9em;
+        }
+        .dish-image {
+            width: 100%; /* Full width of the dish card */
+            height: 300px; /* Fixed height */
+            background-size: cover; /* Cover the entire div */
+            background-position: center; /* Center the image */
+            border-radius: 15px; /* Optional: Round the corners */
+            margin-bottom: 15px; /* Space between image and heading */
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Chef's Special</h1>
+
+        <!-- Chef Section -->
+        <div class="chef-section">
+            <img src="/static/me.jpg" alt="Chef Subham">
+            <div class="chef-info">
+                <h2>Meet Chef Subham</h2>
+                <p>
+                    At the heart of Mirchi Bites' culinary magic is the masterful Chef Subham. With an impeccable palate and an unwavering passion for innovative cuisine, Chef Subham has carved a reputation as one of Odisha's finest chefs. His journey from an aspiring cook to a culinary visionary is nothing short of extraordinary.
+                </p>
+                <p>
+                    Trained in traditional Indian cooking, Chef Subham elevates each dish with a modern twist, blending local flavors with global techniques. His creations are not just food; they are an <span class="highlight">art form</span>—a true celebration of taste, texture, and color.
+                </p>
+                <p>
+                    Whether it's a reinvented classic or an entirely new dish, every plate he serves carries his signature flair, making the dining experience at Mirchi Bites unforgettable.
+                </p>
+            </div>
+        </div>
+
+        <!-- Special Dishes Section -->
+        <div class="special-dishes">
+            <h2>Special Dishes by Chef Subham</h2>
+
+            <div class="dish">
+                <div class="dish-image" style="background-image: url('/static/cf1.jpeg');"></div>
+                
+                <h3>Mutton Rogan Josh</h3>
+                <p>
+                    One of Chef Subham's most celebrated dishes, the <span class="highlight">Mirchi Prawn Delight</span> brings together the bold flavors of coastal Odisha with a fiery twist. Fresh, succulent prawns are marinated in a secret spice blend and grilled to perfection, served with a tangy tamarind sauce that will leave your taste buds craving more.
+                </p>
+            </div>
+
+            <div class="dish">
+                <div class="dish-image" style="background-image: url('/static/cf2.jpg');"></div>
+                <h3>Chicken Bhuna Masala</h3>
+                <p>
+                    This dish is a rich, indulgent treat that takes the humble chicken curry to new heights. Slow-cooked with fragrant spices, tomatoes, and onions, the <span class="highlight">Chicken Bhuna Masala</span> is Chef Subham’s signature comfort food that packs a punch of flavor in every bite.
+                </p>
+            </div>
+            
+
+            <div class="dish">
+                <div class="dish-image" style="background-image: url('/static/br.jpg');"></div>
+                <h3>Hyderabadi Chicken Dum Biryani</h3>
+                <p>
+                    Biryani Lovers , rejoice! Chef Subham’s <span class="highlight">Hyderabadi Biryani</span> is here to win your hearts. This dish features perfectly charred cubes of chicken marinated in an array of spices, grilled to smoky perfection, layed with basmati rice and served with a refreshing mint curd that complements its bold flavors.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Mirchi Bites. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

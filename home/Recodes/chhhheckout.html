@@ -1,0 +1,212 @@
+{% load static %}
+{% load custom_filters %} <!-- Load your custom filter -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Mirchi Bites</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <style>
+        /* Quick CSS for basic styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .checkout-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .checkout-details, .order-summary {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            width: 48%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .checkout-details h2, .order-summary h2 {
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .order-summary .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .order-summary .order-item h4 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .order-summary .order-item span {
+            font-size: 1.1rem;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .order-total {
+            border-top: 2px solid #e74c3c;
+            padding-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .order-total span {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .checkout-button {
+            background-color: #e67e22;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            display: block;
+            margin: 30px auto 0;
+        }
+
+        .checkout-button:hover {
+            background-color: #d35400;
+        }
+
+        .payment-options {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .payment-options label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-options input {
+            margin-right: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Checkout</h1>
+    <div class="checkout-section">
+        <!-- Customer Information -->
+        <div class="checkout-details">
+            <h2>Billing Details</h2>
+            <form method="POST" id="payment-form">
+                {% csrf_token %}
+                <input type="text" name="name" class="input-field" placeholder="Full Name" required>
+                <input type="email" name="email" class="input-field" placeholder="Email Address" required>
+                <input type="text" name="address" class="input-field" placeholder="Shipping Address" required>
+                <input type="text" name="phone" class="input-field" placeholder="Phone Number" required>
+                
+                <!-- Hidden input for total price -->
+                <input type="hidden" name="total_price" value="{{ total_price }}">
+                
+                
+                
+                <button type="submit" class="checkout-button">Pay Now</button>
+            </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h2>Your Order</h2>
+            {% for item in cart_items %}
+            <div class="order-item">
+                <h4>{{ item.product.name }} x {{ item.quantity }}</h4>
+                <span>₹{{ item.product.price|floatformat:2 }}</span>
+                <span> (Total: ₹{{ item.product.price|floatformat:2|multiply:item.quantity|floatformat:2 }})</span>
+            </div>
+            {% endfor %}
+            <div class="order-total">
+                <h4>Total</h4>
+                <span>₹{{ total_price|floatformat:2 }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} <script>
+    var options = {
+        "key": "{{ razorpay_key }}", // Razorpay public key
+        "amount": "{{ total_price|floatformat:2|multiply:100 }}", // Amount in paise
+        "currency": "INR",
+        "name": "Mirchi Bites",
+        "description": "Order Payment",
+        
+        "order_id": "{{ razorpay_order_id }}", // Razorpay order ID
+        "handler": function (response){
+            alert('Payment successful. Payment ID: ' + response.razorpay_payment_id);
+
+            // Attach Razorpay payment ID to form
+            var paymentInput = document.createElement("input");
+            paymentInput.setAttribute("type", "hidden");
+            paymentInput.setAttribute("name", "razorpay_payment_id");
+            paymentInput.setAttribute("value", response.razorpay_payment_id);
+            document.getElementById('payment-form').appendChild(paymentInput);
+            
+            // Submit the form
+            document.getElementById('payment-form').submit();
+        },
+        "prefill": {
+            "name": "{{ request.user.username }}",
+            "email": "{{ request.user.email }}",
+        },
+        "theme": {
+            "color": "#e67e22"
+        }
+    };
+
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function(e) {
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+ {% endcomment %}
+</body>
+</html>

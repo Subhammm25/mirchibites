@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order {{ product.name }} - Mirchi Bites</title>
+    {% load static %}
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1C1C1C; /* Dark background for contrast */
+            color: #FFF5E1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            color: #FF6B35;
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(to right, rgba(214, 35, 35, 0.9), rgba(255, 107, 53, 0.8)), url("{% static 'images/hero-image.jpg' %}"); /* Overlay with image */
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            font-weight: 900;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+        }
+
+        /* Product Section */
+        .product-container {
+            display: flex;
+            background-color: #2C2C2C;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            color: white;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .product-image {
+            flex: 1;
+            max-width: 500px;
+            margin-right: 40px;
+        }
+
+        .product-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s ease;
+        }
+
+        .product-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-details h2 {
+            font-size: 2.5em;
+            color: #FF6B35;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .product-description {
+            font-size: 1.2em;
+            color: #FFF5E1;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .product-price {
+            font-size: 2em;
+            color: #FF6B35;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        /* Order Form */
+        .order-form {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quantity-input {
+            width: 80px;
+            padding: 12px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            background-color: #FF6B35;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .btn-order {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #D62323;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5em;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-order:hover {
+            background-color: #FF6B35;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: auto;
+        }
+
+        .footer p {
+            font-size: 0.9em;
+            color: #FFF5E1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Order {{ product.name }}</h1>
+    </section>
+
+    <!-- Product Section -->
+    <div class="container">
+        <div class="product-container">
+            <!-- Product Image -->
+            <div class="product-image">
+                <img src="{% static 'product_images/' %}{{ product.image }}" alt="{{ product.name }}">
+            </div>
+            <!-- Product Details -->
+            <div class="product-details">
+                <h2>{{ product.name }}</h2>
+                <p class="product-description">{{ product.description }}</p>
+                <p class="product-price">₹{{ product.price }}</p>
+
+                <!-- Order Form -->
+                <form method="POST" action="{% url 'add_to_cart' %}" class="order-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="hidden" name="product_name" value="{{ product.name }}">
+                    <input type="hidden" name="product_price" value="{{ product.price }}">
+                    <button type="submit" class="btn-order">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Mirchi Bites. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

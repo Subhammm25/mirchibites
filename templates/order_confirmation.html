@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Mirchi Bites</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}"> <!-- Link your main CSS file -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #e74c3c;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #e67e22;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+        }
+
+        li span {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .total-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e67e22;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Thank You for Your Order!</h1>
+    <p>Your order ID is: <strong>{{ order.id }}</strong></p>
+    <h2>Order Summary:</h2>
+    <ul>
+        {% for item in order.items.all %}
+            <li>
+                {{ item.product.name }} x {{ item.quantity }} 
+                <span>₹{{ item.price }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <p class="total-price"><strong>Total Price:</strong> ₹{{ order.total_price }}</p>
+    <p class="footer">We will send a confirmation email to <strong>{{ order.email }}</strong> shortly.</p>
+</div>
+
+</body>
+</html>

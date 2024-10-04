@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.username }}'s Profile</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF5E1;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: #FFF;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #D62323;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        h3 {
+            color: #FF6B35;
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .profile-details {
+            border-bottom: 2px solid #FF6B35;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .profile-details p {
+            font-size: 1.1em;
+            margin: 8px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #FFF;
+            border: 1px solid #FF6B35;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: #333;
+            color: white;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome, {{ user.username }}!</h1>
+        
+        <div class="profile-details">
+            <h3>Your Details:</h3>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            
+        </div>
+
+        <h3>Your Past Orders:</h3>
+        {% if past_orders %}
+            <ul>
+                {% for order in past_orders %}
+                    <li>
+                        <span><strong>Order #{{ order.id }}:</strong> Placed on {{ order.created_at }}</span>
+                        <span>Total: Rs.{{ order.total_price }} - Status: {{ order.status }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You haven't placed any orders yet.</p>
+        {% endif %}
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Mirchi Bites. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
