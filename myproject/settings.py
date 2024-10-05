@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.staticfiles',
     "home.apps.HomeConfig",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -45,6 +46,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+     'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -195,14 +197,6 @@ LOGGING = {
 }
 
 
-# Add WhiteNoise middleware
-MIDDLEWARE = [
-    ...,
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    ...
-]
-
-
 # Simplified static file serving
 # https://warehouse.python.org/project/whitenoise/
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
@@ -210,6 +204,7 @@ MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 import dj_database_url
 
