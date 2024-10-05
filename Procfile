@@ -1,1 +1,1 @@
-web: gunicorn MirchiBites.wsgi --log-file -
+web: gunicorn home.wsgi --log-file -
