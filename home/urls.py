@@ -11,6 +11,7 @@ from .views import (
 
 
 urlpatterns = [
+    path("", views.home, name="home"),
     path("home/", views.home, name="home"),
     # path('home/', views.home, name='home'), 
     path("login/", views.loginuser, name="login"),
