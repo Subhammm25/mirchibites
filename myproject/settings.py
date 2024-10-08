@@ -88,33 +88,29 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mirchibites_postsql_mb',  # Database name
-        'USER': 'mirchibites_postsql_mb_user',  # Database username
-        'PASSWORD': 'kfhoUHtxzD4T0TxjkUV2ZYgT9iSnCW62',  # Replace with your actual password
-        'HOST': 'dpg-cs0kf4a3esus7394a2s0-a',  # Internal hostname
-        'PORT': '5432',  # Database port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+# # Password validation
+# # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
+# AUTH_PASSWORD_VALIDATORS = [
+#     {
+#         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+#     },
+#     {
+#         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+#     },
+#     {
+#         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+#     },
+#     {
+#         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+#     },
+# ]
 
 
 # Internationalization
@@ -167,12 +163,12 @@ USE_TZ = True  # Enable timezone support
 
 
 
-# Define the path to your service account key
-SERVICE_ACCOUNT_PATH = os.path.join(BASE_DIR, "home/key/serviceAccountKey.json")
+# # Define the path to your service account key
+# SERVICE_ACCOUNT_PATH = os.path.join(BASE_DIR, "home/key/serviceAccountKey.json")
 
-# Load the service account key and initialize Firebase
-cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
-firebase_admin.initialize_app(cred)
+# # Load the service account key and initialize Firebase
+# cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
+# firebase_admin.initialize_app(cred)
 
 
 
@@ -216,10 +212,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-import dj_database_url
+# import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://localhost'
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgres://localhost'
+#     )
+# }
