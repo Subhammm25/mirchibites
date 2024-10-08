@@ -40,16 +40,16 @@ The application follows a Model-View-Template (MVT) architecture. The backend ha
 
 
 
-          Frontend
+    Frontend
                    
    (HTML, CSS, JavaScript)  
                
 
-          Django            
+    Django            
   (Backend API & Logic)     
 
 
-       PostgreSQL           
+   PostgreSQL           
    (Database Management)  
 
 
