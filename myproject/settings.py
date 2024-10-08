@@ -86,10 +86,20 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mirchibites_postsql_mb',  # Database name
+        'USER': 'mirchibites_postsql_mb_user',  # Database username
+        'PASSWORD': 'kfhoUHtxzD4T0TxjkUV2ZYgT9iSnCW62',  # Replace with your actual password
+        'HOST': 'dpg-cs0kf4a3esus7394a2s0-a',  # Internal hostname
+        'PORT': '5432',  # Database port
     }
 }
 
