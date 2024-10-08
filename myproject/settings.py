@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 
 
-ALLOWED_HOSTS = ['mirchibites.herokuapp.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['mirchibites.herokuapp.com', '127.0.0.1:8000', 'mirchibites-603f1abd1897.herokuapp.com']
 
 
 DEBUG = False # or False in production
