@@ -25,9 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 
 
+ALLOWED_HOSTS = ['mirchibites.herokuapp.com', '127.0.0.1:8000']
 
 
-DEBUG = True  # or False in production
+DEBUG = False # or False in production
 
 
 # Application definition
@@ -214,3 +215,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
 
 # Get the WSGI application for the Django project.
 application = get_wsgi_application()
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
