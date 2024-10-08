@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import firebase_admin
-from firebase_admin import credentials
+# import firebase_admin
+# from firebase_admin import credentials
 import os
-import dj_database_url
-from decouple import config
+# import dj_database_url
+# from decouple import config
 import dj_database_url
 
 
@@ -89,15 +89,10 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 # Replace the SQLite DATABASES configuration with PostgreSQL:
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mirchibites_postsql_mb',  # Database name
-        'USER': 'mirchibites_postsql_mb_user',  # Database username
-        'PASSWORD': 'kfhoUHtxzD4T0TxjkUV2ZYgT9iSnCW62',  # Replace with your actual password
-        'HOST': 'dpg-cs0kf4a3esus7394a2s0-a',  # Internal hostname
-        'PORT': '5432',  # Database port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 
 # Password validation
@@ -170,11 +165,11 @@ USE_TZ = True  # Enable timezone support
 
 
 # Define the path to your service account key
-SERVICE_ACCOUNT_PATH = os.path.join(BASE_DIR, "home/key/serviceAccountKey.json")
+# SERVICE_ACCOUNT_PATH = os.path.join(BASE_DIR, "home/key/serviceAccountKey.json")
 
-# Load the service account key and initialize Firebase
-cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
-firebase_admin.initialize_app(cred)
+# # Load the service account key and initialize Firebase
+# cred = credentials.Certificate(SERVICE_ACCOUNT_PATH)
+# firebase_admin.initialize_app(cred)
 
 
 
@@ -224,3 +219,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 #         default='postgres://localhost'
 #     )
 # }
+
+# import os
+from django.core.wsgi import get_wsgi_application
+
+# Set the default Django settings module for the 'myproject' project.
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+
+# Get the WSGI application for the Django project.
+application = get_wsgi_application()
