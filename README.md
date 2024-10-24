@@ -1,3 +1,6 @@
+Link to Website : Mirchibites-603f1abd1897.herokuapp.com
+
+
 Mirchi Bites
 
 Mirchi Bites is a vibrant and modern food delivery website built to provide users with a seamless experience in ordering delicious meals online. The project encompasses a robust backend powered by Django, a dynamic frontend built with HTML, CSS, and JavaScript, and integrates with Razorpay for secure payment processing. The website is designed to be responsive, ensuring a delightful experience across various devices.
