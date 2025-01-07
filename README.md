@@ -33,7 +33,7 @@ JavaScript (ES6)
 Backend:
 Django
 Django REST Framework
-PostgreSQL
+MYSQL
 Payment Processing:
 Razorpay API
 
@@ -52,7 +52,7 @@ The application follows a Model-View-Template (MVT) architecture. The backend ha
   (Backend API & Logic)     
 
 
-   PostgreSQL           
+   MySQL           
    (Database Management)  
 
 
