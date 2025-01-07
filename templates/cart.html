@@ -131,7 +131,8 @@
     <div class="cart-items">
         {% for item in cart_items %}
         <div class="cart-item">
-            <img src="{% static 'product_images/' %}{{ item.product.image }}" alt="{{ item.product.name }}">
+            <!-- Corrected the reference to item.product -->
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
             <div class="cart-item-details">
                 <div class="cart-item-title">{{ item.product.name }}</div>
                 <div class="cart-item-price">₹{{ item.product.price }}</div>
@@ -147,7 +148,6 @@
         {% endfor %}
     </div>
 
-    
     <div class="checkout">
         <a href="{% url 'checkout' %}">
             <button>Proceed to Checkout</button>

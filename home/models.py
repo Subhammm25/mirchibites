@@ -64,11 +64,11 @@ class Order(models.Model):
     name = models.CharField(max_length=255, null=False, default='Unnamed Customer')
     email = models.EmailField(default="example@example.com")
     address = models.TextField(default='Enter Your Address')
-    phone = models.CharField(max_length=15, null=False, default='Enter Phone Number')
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHOD_CHOICES, default='razorpay')  # Updated default
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, default='Pending')
+    payment_method = models.CharField(max_length=20, choices=[('COD', 'Cash on Delivery'), ('razorpay', 'Razorpay')])
 
     def __str__(self):
         return f"Order {self.id} by {self.name}"

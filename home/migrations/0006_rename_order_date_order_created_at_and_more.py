@@ -12,87 +12,82 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name="order",
-            old_name="order_date",
-            new_name="created_at",
+    migrations.RenameField(
+        model_name="order",
+        old_name="total_amount",
+        new_name="total_price",
+    ),
+    migrations.RemoveField(
+        model_name="order",
+        name="status",
+    ),
+    migrations.AddField(
+        model_name="order",
+        name="address",
+        field=models.TextField(default="Enter Your Address"),
+    ),
+    migrations.AddField(
+        model_name="order",
+        name="email",
+        field=models.EmailField(default="example@example.com", max_length=254),
+    ),
+    migrations.AddField(
+        model_name="order",
+        name="name",
+        field=models.CharField(default="Unnamed Customer", max_length=255),
+    ),
+    migrations.AddField(
+        model_name="order",
+        name="payment_method",
+        field=models.CharField(
+            choices=[("credit_card", "Credit Card"), ("cod", "Cash on Delivery")],
+            default="Choose payment method",
+            max_length=20,
         ),
-        migrations.RenameField(
-            model_name="order",
-            old_name="total_amount",
-            new_name="total_price",
+    ),
+    migrations.AddField(
+        model_name="order",
+        name="phone",
+        field=models.CharField(default="Enter Phone Number", max_length=15),
+    ),
+    migrations.AlterField(
+        model_name="order",
+        name="user",
+        field=models.ForeignKey(
+            blank=True,
+            null=True,
+            on_delete=django.db.models.deletion.CASCADE,
+            to=settings.AUTH_USER_MODEL,
         ),
-        migrations.RemoveField(
-            model_name="order",
-            name="status",
-        ),
-        migrations.AddField(
-            model_name="order",
-            name="address",
-            field=models.TextField(default="Enter Your Address"),
-        ),
-        migrations.AddField(
-            model_name="order",
-            name="email",
-            field=models.EmailField(default="example@example.com", max_length=254),
-        ),
-        migrations.AddField(
-            model_name="order",
-            name="name",
-            field=models.CharField(default="Unnamed Customer", max_length=255),
-        ),
-        migrations.AddField(
-            model_name="order",
-            name="payment_method",
-            field=models.CharField(
-                choices=[("credit_card", "Credit Card"), ("cod", "Cash on Delivery")],
-                default="Choose payment method",
-                max_length=20,
+    ),
+    migrations.CreateModel(
+        name="OrderItem",
+        fields=[
+            (
+                "id",
+                models.BigAutoField(
+                    auto_created=True,
+                    primary_key=True,
+                    serialize=False,
+                    verbose_name="ID",
+                ),
             ),
-        ),
-        migrations.AddField(
-            model_name="order",
-            name="phone",
-            field=models.CharField(default="Enter Phone Number", max_length=15),
-        ),
-        migrations.AlterField(
-            model_name="order",
-            name="user",
-            field=models.ForeignKey(
-                blank=True,
-                null=True,
-                on_delete=django.db.models.deletion.CASCADE,
-                to=settings.AUTH_USER_MODEL,
+            ("quantity", models.PositiveIntegerField(default=1)),
+            ("price", models.DecimalField(decimal_places=2, max_digits=10)),
+            (
+                "order",
+                models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name="items",
+                    to="home.order",
+                ),
             ),
-        ),
-        migrations.CreateModel(
-            name="OrderItem",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
+            (
+                "product",
+                models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to="home.product"
                 ),
-                ("quantity", models.PositiveIntegerField(default=1)),
-                ("price", models.DecimalField(decimal_places=2, max_digits=10)),
-                (
-                    "order",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="items",
-                        to="home.order",
-                    ),
-                ),
-                (
-                    "product",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE, to="home.product"
-                    ),
-                ),
-            ],
-        ),
-    ]
+            ),
+        ],
+    ),
+]

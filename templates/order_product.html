@@ -172,7 +172,8 @@
         <div class="product-container">
             <!-- Product Image -->
             <div class="product-image">
-                <img src="{% static 'product_images/' %}{{ product.image }}" alt="{{ product.name }}">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
             </div>
             <!-- Product Details -->
             <div class="product-details">

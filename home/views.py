@@ -154,7 +154,7 @@ def update_cart_item(request, item_id):
             cart_item.save()
             messages.success(request, "Cart item updated successfully.")
         
-        return redirect('view_cart')
+        return redirect('cart')
 
 
 from django.utils import timezone
@@ -186,17 +186,15 @@ def checkout(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         address = request.POST.get('address')
-        phone = request.POST.get('phone')
         payment_method = request.POST.get('payment_method', 'COD')  # Default to COD
 
-        if name and email and address and phone:
+        if name and email and address:
             # Create the order
             order = Order.objects.create(
                 user=request.user,
                 name=name,
                 email=email,
                 address=address,
-                phone=phone,
                 payment_method=payment_method,
                 total_price=total_price_rounded,
                 created_at=timezone.now(),
@@ -285,12 +283,11 @@ def payment_success(request):
                 name=request.POST.get('name'),
                 email=request.POST.get('email'),
                 address=request.POST.get('address'),
-                phone=request.POST.get('phone'),
                 payment_method='razorpay',
                 total_price=total_price,
                 status='Pending'
             )
-            print(f"Name: {name}, Email: {email}, Address: {address}, Phone: {phone}, Payment Method: {payment_method}")
+            print(f"Name: {name}, Email: {email}, Address: {address}, Payment Method: {payment_method}")
             logger.info(f"Order created successfully: Order ID {order.id}.")
         except Exception as e:
             logger.error(f"Order creation failed: {str(e)}")

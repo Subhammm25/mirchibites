@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
+# import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 
 
-ALLOWED_HOSTS = ['mirchibites.herokuapp.com', '127.0.0.1:8000', 'mirchibites-603f1abd1897.herokuapp.com']
+ALLOWED_HOSTS = ['mirchibites.herokuapp.com', '127.0.0.1', 'localhost']
 
 
-DEBUG = False # or False in production
+DEBUG = True # or False in production
 
 
 # Application definition
@@ -77,10 +77,16 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 
 
 
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mirchibites',
+        'USER': 'mirchibites',
+        'PASSWORD': 'subham25',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -131,7 +137,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # For media files (like images)
@@ -216,5 +222,5 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
 # Get the WSGI application for the Django project.
 application = get_wsgi_application()
 
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)

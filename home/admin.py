@@ -12,8 +12,8 @@ class ProductAdmin(admin.ModelAdmin):
 # Register the Order model to the admin
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'phone', 'email', 'status', 'total_price', 'created_at')
-    search_fields = ('name', 'phone', 'email')
+    list_display = ('id', 'name',  'email', 'status', 'total_price', 'created_at')
+    search_fields = ('name',  'email')
     list_filter = ('status', 'created_at')
     
     

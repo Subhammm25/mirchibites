@@ -137,7 +137,8 @@
             {% for product in products %}
             <div class="product-card">
            <a href="{% url 'order_product' product.id %}">  
-                    <img src="{% static 'product_images/' %}{{ product.image }}" alt="{{ product.name }}" class="product-image">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+
                 </a>
                 <div class="product-info">
                     
